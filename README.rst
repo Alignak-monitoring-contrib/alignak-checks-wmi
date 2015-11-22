@@ -24,7 +24,7 @@ To install the package from the source files:
    # Copy configuration files
    cp -R alignak_checks_wmi/*.cfg /usr/local/etc/alignak/arbiter_cfg/objects/packs/wmi
    # Copy plugin files
-   cp -R alignak_checks_wmi/plugins/*.py /usr/local/libexec/alignak
+   cp -R alignak_checks_wmi/plugins/* /usr/local/libexec/alignak
 
 
 Documentation
