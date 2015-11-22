@@ -105,9 +105,9 @@ def get_alignak_cfg():
 # Overloading setup.py install_data
 class my_install_data(_install_data):
     def run(self):
-        print("Before install data ...")
+        # Setuptools install_data ...
         _install_data.run(self)
-        print("After install data ...")
+
         # After data files installation ...
         # ... parse configuration files to update installation dir
         if parsed_files:
@@ -248,8 +248,8 @@ if data_files:
 # parsed_files contains tuples for files to be parsed (directory, file)
 if parsed_files:
     print "Parsed files: "
-    for k,v in parsed_files:
-        print " %s = %s" % (k,v)
+    for dir,file in parsed_files:
+        print " %s = %s" % (dir,file)
 
 setup(
     name=__pkg_name__,
