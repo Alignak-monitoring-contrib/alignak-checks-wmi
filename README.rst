@@ -5,42 +5,30 @@ Checks pack for monitoring hosts with Windows Management Instrumentation (WMI)
 
 
 Installation
-----------------------------------------
+------------
 
 From PyPI
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~
 To install the package from PyPI:
 ::
    pip install alignak-checks-wmi
 
 
 From source files
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 To install the package from the source files:
 ::
    git clone https://github.com/Alignak-monitoring-contrib/alignak-checks-wmi
    cd alignak-checks-wmi
-   mkdir /usr/local/etc/alignak/arbiter_cfg/objects/packs/wmi
-   # Copy configuration files
-   cp -R alignak_checks_wmi/*.cfg /usr/local/etc/alignak/arbiter_cfg/objects/packs/wmi
-   # Copy plugin files
-   cp -R alignak_checks_wmi/plugins/* /usr/local/libexec/alignak
+   sudo python setup.py install
 
 
 Documentation
-----------------------------------------
+-------------
 
 Configuration
-~~~~~~~~~~~~~~~~~~~~~~~
-Install the PERL dependencies for check_wmi_plus plugin
-::
-   su -
-   apt-get install libnumber-format-perl
-   apt-get install libconfig-inifiles-perl
-   apt-get install libdatetime-perl
-
-
-Edit the */usr/local/etc/alignak/arbiter_cfg/objects/packs/wmi/resources.cfg* file and configure the domain name, user name and password allowed to access remotely to the monitored hosts WMI.
+~~~~~~~~~~~~~
+Edit the */usr/local/etc/alignak/arbiter/packs/wmi/resources.cfg* file and configure the domain name, user name and password allowed to access remotely to the monitored hosts WMI.
 ::
    #-- Active Directory for WMI
    # Replace MYDOMAIN with your domain name or . for local user account
@@ -52,7 +40,7 @@ Edit the */usr/local/etc/alignak/arbiter_cfg/objects/packs/wmi/resources.cfg* fi
    $DOMAINPASSWORD$=MYPASSWORD
 
 Prepare Windows host
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 Some operations are necessary on the Windows monitored hosts if WMI remote access is not yet activated.
 
 Create a user account:
@@ -73,14 +61,14 @@ This page contains more information about remote WMI configuration: https://kb.o
 Test remote WMI access with the plugins files:
 ::
    # Basic wmic command ...
-   $ /var/lib/alignak/libexec/wmic -U .\\alignak%alignak //192.168.0.20 'Select Caption From Win32_OperatingSystem'
+   $ /usr/local/var/libexec/alignak/wmic -U .\\alignak%alignak //192.168.0.20 'Select Caption From Win32_OperatingSystem'
 
    # Alignak plugin command ...
-   $ /var/lib/alignak/libexec/check_wmi_plus.pl -H 192.168.0.20 -u ".\\alignak" -p "alignak" -m checkdrivesize -a '.'  -w 90 -c 95 -o 0 -3 1  --inidir=/var/lib/alignak/libexec
+   $ /usr/local/var/libexe/alignak/check_wmi_plus.pl -H 192.168.0.20 -u ".\\alignak" -p "alignak" -m checkdrivesize -a '.'  -w 90 -c 95 -o 0 -3 1  --inidir=/usr/local/var/libexec/alignak
 
 
 Alignak configuration
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 You simply have to tag the concerned hosts with the template `windows-wmi`. The main `windows-wmi` template declares macros used to configure the launched checks. The default values of these macros listed hereunder can be overriden in each host configuration.
 ::
@@ -141,13 +129,13 @@ To set a specific value for an host, declare the same macro in the host definiti
 
 
 Bugs, issues and contributing
-----------------------------------------
+-----------------------------
 
 Contributions to this project are welcome and encouraged ... issues in the project repository are the common way to raise an information.
 
 License
-----------------------------------------
+-------
 
-Alignak Pack EXAMPLE is available under the `GPL version 3 license`_.
+Alignak Pack Checks WMI is available under the `GPL version 3 license`_.
 
 .. _GPL version 3 license: http://opensource.org/licenses/GPL-3.0
