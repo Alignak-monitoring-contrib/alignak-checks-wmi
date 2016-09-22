@@ -7,6 +7,8 @@ import re
 import datetime
 del os.link
 import fileinput
+import getpass
+from string import Template
 
 try:
     import distutils.core
@@ -55,7 +57,7 @@ def get_alignak_cfg():
     }
 
     # Search Alignak main configuration file
-    alignak_etc_default = None
+    alignak_etc_default = "/"
     if os.path.isfile("/usr/local/etc/default/alignak"):
         alignak_etc_default = "/usr/local/etc/default/alignak"
     elif os.path.isfile("/etc/default/alignak"):
@@ -107,9 +109,6 @@ def get_alignak_cfg():
 
 # Overloading setup.py install_data
 class my_install_data(_install_data):
-    """
-    Overload the default copy of files
-    """
     def run(self):
         """
         Overload the default copy of files:
