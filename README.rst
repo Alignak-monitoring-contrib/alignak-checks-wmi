@@ -40,7 +40,8 @@ The embedded version of ``wmic`` is only compatible with Linux distros. For Unix
     tar Jxvf wmi-client-1.3.16_1.txz
     # winexe and wmic scripts are available in /usr/local/bin/
 
-The *check_wmi_plus.pl* script assumes that the executable *wmic* is installed in */usr/bin/wmic*. Edit the *check_wmi_plus.pl* script to change the *wmic* location if necessary.
+The *check_wmi_plus.pl* script assumes that the executable *wmic* is installed in the Alignak plugins directory.
+Edit the *check_wmi_plus.conf* configuration file to change the *wmic* location if necessary. The variable to set is **$wmic_command**.
 
 Edit the */usr/local/etc/alignak/arbiter/packs/resource.d/wmi.cfg* file and configure the domain
 name, user name and password allowed to access remotely to the monitored hosts WMI.
