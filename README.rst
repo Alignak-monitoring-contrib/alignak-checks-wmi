@@ -31,6 +31,7 @@ Configuration
 Edit the */usr/local/etc/alignak/arbiter/packs/resource.d/wmi.cfg* file and configure the domain
 name, user name and password allowed to access remotely to the monitored hosts WMI.
 ::
+
     #-- Active Directory for WMI
     # Replace MYDOMAIN with your domain name or . for local user account
     $DOMAIN$=MYDOMAIN
@@ -85,7 +86,16 @@ An abstract of this article::
 Alignak configuration
 ~~~~~~~~~~~~~~~~~~~~~
 
-You simply have to tag the concerned hosts with the template `windows-wmi`. The main `windows-wmi` template declares macros used to configure the launched checks. The default values of these macros listed hereunder can be overriden in each host configuration.
+You simply have to tag the concerned hosts with the template `windows-wmi`.
+::
+
+    define host{
+        use                     windows-wmi
+        host_name               host_windows_wmi
+        address                 127.0.0.1
+    }
+
+The main `windows-wmi` template declares macros used to configure the launched checks. The default values of these macros listed hereunder can be overriden in each host configuration.
 ::
    _DOMAIN                          $DOMAIN$
    _DOMAINUSERSHORT                 $DOMAINUSERSHORT$
