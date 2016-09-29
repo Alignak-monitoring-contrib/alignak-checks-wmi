@@ -28,6 +28,21 @@ Documentation
 
 Configuration
 ~~~~~~~~~~~~~
+
+**Note**: this pack embeds the ``wmic`` binary that is not always easy to find for Linux distributions :/
+
+
+The embedded version of ``wmic`` is only compatible with Linux distros. For Unix (FreeBSD), you can simply install the wmic port:
+::
+
+    pkg install wmi-client
+    cd /var/cache/pkg/
+    tar Jxvf wmi-client-1.3.16_1.txz
+    tar Jxvf wmi-client-1.3.16_1-88aef5685f.txz
+    cd /usr/local/bin/
+
+The *check_wmi_plus.pl* script assumes that the executable *wmic* is installed in */usr/bin/wmic*. Edit the *check_wmi_plus.pl* script to change the *wmic* location if necessary.
+
 Edit the */usr/local/etc/alignak/arbiter/packs/resource.d/wmi.cfg* file and configure the domain
 name, user name and password allowed to access remotely to the monitored hosts WMI.
 ::
@@ -62,12 +77,15 @@ This page contains more information about remote WMI configuration: https://kb.o
 
 Test remote WMI access with the plugins files:
 ::
+
    # Basic wmic command ...
    $ /usr/local/var/libexec/alignak/wmic -U .\\alignak%alignak //192.168.0.20 'Select Caption From Win32_OperatingSystem'
 
    # Alignak plugin command ...
    $ /usr/local/var/libexe/alignak/check_wmi_plus.pl -H 192.168.0.20 -u ".\\alignak" -p "alignak" -m checkdrivesize -a '.'  -w 90 -c 95 -o 0 -3 1  --inidir=/usr/local/var/libexec/alignak
 
+
+**Note**: these commands assume that you created an *alignak* user account with *alignak* as a password.
 
 As a default, WMI opens random TCP ports to communicate with the requesting customer. The Windows WMI service can be configured to use only one port as explained here:
 https://msdn.microsoft.com/en-us/library/bb219447(v=vs.85).aspx.
