@@ -32,6 +32,7 @@ my $conf_file='ALIGNAKLIB/check_wmi_plus.conf';
 # we are looking for the dir where utils.pm is located. This is normally installed as part of Nagios
 use lib "/usr/lib/nagios/plugins";
 use lib "/usr/lib64/nagios/plugins";
+use lib "ALIGNAKLIB";
 
 # you shouldn't need to change anything else below this line
 # change the settings in the $conf_file itself
@@ -3247,7 +3248,7 @@ if ($function eq 'PERF_100NSEC_TIMER_INV') {
    # customfield=_almost_total_vm_memory,HYPERV_TOTALVM_MEMORY,Value1GGPApages,Value2MGPApages,Value4KGPApages,DepositedPages
    # select Name,Value1GGPApages,Value2MGPApages,Value4KGPApages,DepositedPages from Win32_PerfRawData_HvStats_HyperVHypervisorPartition
    # it requires 1 completed WMI queries (sample=1)
-   # almost_total_vm_memory = “1G GPA Pages” * 1024 + (“2M GPA Pages” * 2) + ((“4K GPA Pages” + “Deposited pages”) / 256)
+   # almost_total_vm_memory = ï¿½1G GPA Pagesï¿½ * 1024 + (ï¿½2M GPA Pagesï¿½ * 2) + ((ï¿½4K GPA Pagesï¿½ + ï¿½Deposited pagesï¿½) / 256)
    #
    # the parameters for this "function" are
    # Value1GGPApages,Value2MGPApages,Value4KGPApages,DepositedPages,SPRINTF_SPEC

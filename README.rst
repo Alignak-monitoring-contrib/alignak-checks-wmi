@@ -38,8 +38,7 @@ The embedded version of ``wmic`` is only compatible with Linux distros. For Unix
     pkg install wmi-client
     cd /var/cache/pkg/
     tar Jxvf wmi-client-1.3.16_1.txz
-    tar Jxvf wmi-client-1.3.16_1-88aef5685f.txz
-    cd /usr/local/bin/
+    # winexe and wmic scripts are available in /usr/local/bin/
 
 The *check_wmi_plus.pl* script assumes that the executable *wmic* is installed in */usr/bin/wmic*. Edit the *check_wmi_plus.pl* script to change the *wmic* location if necessary.
 
@@ -55,6 +54,27 @@ name, user name and password allowed to access remotely to the monitored hosts W
     $DOMAINUSER$=$DOMAIN$\\$DOMAINUSERSHORT$
     # Replace MYPASSWORD with the WMI authorized user password
     $DOMAINPASSWORD$=MYPASSWORD
+
+Install PERL dependencies for check_wmi_plus plugin
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+You must install some PERL dependencies for the *check_wmi_plus.pl* script.
+
+On some Linux distros, you can::
+
+   su -
+   apt-get install libnumber-format-perl
+   apt-get install libconfig-inifiles-perl
+   apt-get install libdatetime-perl
+
+Or you can use the PERL *cpan* utility::
+
+    cpan install Config::IniFiles
+    cpan install Number::Format
+    cpan install DateTime
+
+
+More information is available on `Check WMI Plus Web site<http://edcint.co.nz/checkwmiplus/?q=Installation>`_.
+
 
 Prepare Windows host
 ~~~~~~~~~~~~~~~~~~~~
