@@ -114,8 +114,8 @@ https://msdn.microsoft.com/en-us/library/bb219447(v=vs.85).aspx.
 An abstract of this article::
 
     To set up a fixed port for WMI
-    1. At the command prompt, type: winmgmt -standalonehost
-    2. Stop the WMI service by typing the command: net stop "Windows Management Instrumentation", or use the short name of net stop winmgmt
+    1. Stop the WMI service by typing the command: net stop "Windows Management Instrumentation", or net stop winmgmt
+    2. At the command prompt, type: winmgmt -standalonehost
     3. Restart the WMI service again in a new service host by typing: net start "Windows Management Instrumentation" or net start winmgmt
     4. Establish a new port number for the WMI service by typing: netsh firewall add portopening TCP 24158 WMIFixedPort
 
