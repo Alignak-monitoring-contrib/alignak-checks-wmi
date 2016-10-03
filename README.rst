@@ -5,7 +5,7 @@ Checks pack for monitoring hosts with Windows Management Instrumentation (WMI)
 
 
 Installation
-----------------------------------------
+------------
 
 From PyPI
 ~~~~~~~~~
@@ -15,7 +15,7 @@ To install the package from PyPI:
 
 
 From source files
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 To install the package from the source files:
 ::
    git clone https://github.com/Alignak-monitoring-contrib/alignak-checks-wmi
