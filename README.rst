@@ -1,26 +1,45 @@
 Alignak checks package for Windows WMI
 ======================================
 
-Checks pack for monitoring hosts with Windows Management Instrumentation (WMI)
+*Checks pack for monitoring hosts with Windows Management Instrumentation (WMI)*
 
+
+.. image:: https://badge.fury.io/py/alignak_checks_wmi.svg
+    :target: https://badge.fury.io/py/alignak-checks-wmi
+    :alt: Most recent PyPi version
+
+.. image:: https://img.shields.io/badge/IRC-%23alignak-1e72ff.svg?style=flat
+    :target: http://webchat.freenode.net/?channels=%23alignak
+    :alt: Join the chat #alignak on freenode.net
+
+.. image:: https://img.shields.io/badge/License-AGPL%20v3-blue.svg
+    :target: http://www.gnu.org/licenses/agpl-3.0
+    :alt: License AGPL v3
 
 Installation
 ------------
+
+The installation of this checks pack will copy some configuration files in the Alignak default configuration directory (eg. */usr/local/etc/alignak*). The copied files are located in the default sub-directory used for the packs (eg. *arbiter/packs*).
 
 From PyPI
 ~~~~~~~~~
 To install the package from PyPI:
 ::
-   pip install alignak-checks-wmi
+
+   sudo pip install alignak-checks-wmi
 
 
 From source files
 ~~~~~~~~~~~~~~~~~
 To install the package from the source files:
 ::
+
    git clone https://github.com/Alignak-monitoring-contrib/alignak-checks-wmi
-   cd alignak-checks-wmi
-   sudo python setup.py install
+   cd alignak-checks-linux-snmp
+   sudo pip install .
+
+**Note:** *using `sudo python setup.py install` will not correctly manage the package configuration files! The recommended way is really to use `pip`;)*
+
 
 
 Documentation
@@ -43,8 +62,9 @@ The embedded version of ``wmic`` is only compatible with Linux distros. For Unix
 The *check_wmi_plus.pl* script assumes that the executable *wmic* is installed in the Alignak plugins directory.
 Edit the *check_wmi_plus.conf* configuration file to change the *wmic* location if necessary. The variable to set is **$wmic_command**.
 
-Edit the */usr/local/etc/alignak/arbiter/packs/resource.d/wmi.cfg* file and configure the domain
-name, user name and password allowed to access remotely to the monitored hosts WMI.
+**Note:** The files *check_wmi_plus.pl* and *check_wmi_plus.conf*, located in the */usr/local/var/libexec/alignak*, need some configuration. Edit them and search for the ALIGNAK keyword to find out what is to be configured and set according to your server.
+
+Edit the */usr/local/etc/alignak/arbiter/packs/resource.d/wmi.cfg* file and configure the domain name, user name and password allowed to access remotely to the monitored hosts WMI.
 ::
 
     #-- Active Directory for WMI
@@ -55,6 +75,7 @@ name, user name and password allowed to access remotely to the monitored hosts W
     $DOMAINUSER$=$DOMAIN$\\$DOMAINUSERSHORT$
     # Replace MYPASSWORD with the WMI authorized user password
     $DOMAINPASSWORD$=MYPASSWORD
+
 
 Install PERL dependencies for check_wmi_plus plugin
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -90,9 +111,9 @@ Create a user account:
 Check that WMI and RPC services are started
 
 The Windows Firewall must allow inbound trafic for:
-   - Windows Firewall Remote Management (RPC)
-   - Windows Management Instrumentation (DCOM-In)
-   - Windows Management Instrumentation (WMI-In)
+- Windows Firewall Remote Management (RPC)
+- Windows Management Instrumentation (DCOM-In)
+- Windows Management Instrumentation (WMI-In)
 
 This page contains more information about remote WMI configuration: https://kb.op5.com/display/HOWTOs/Agentless+Monitoring+of+Windows+using+WMI
 
@@ -136,6 +157,7 @@ You simply have to tag the concerned hosts with the template `windows-wmi`.
 
 The main `windows-wmi` template declares macros used to configure the launched checks. The default values of these macros listed hereunder can be overriden in each host configuration.
 ::
+
    _DOMAIN                          $DOMAIN$
    _DOMAINUSERSHORT                 $DOMAINUSERSHORT$
    _DOMAINUSER                      $_HOSTDOMAIN$\\$_HOSTDOMAINUSERSHORT$
@@ -172,6 +194,7 @@ The main `windows-wmi` template declares macros used to configure the launched c
 
 To set a specific value for an host, declare the same macro in the host definition file.
 ::
+
    define host{
       use                     windows-wmi
       contact_groups          admins
@@ -195,11 +218,4 @@ To set a specific value for an host, declare the same macro in the host definiti
 Bugs, issues and contributing
 -----------------------------
 
-Contributions to this project are welcome and encouraged ... issues in the project repository are the common way to raise an information.
-
-License
--------
-
-Alignak Pack EXAMPLE is available under the `GPL version 3 license`_.
-
-.. _GPL version 3 license: http://opensource.org/licenses/GPL-3.0
+Contributions to this project are welcome and encouraged ... `issues in the project repository <https://github.com/alignak-monitoring-contrib/alignak-checks-wmi/issues>`_ are the common way to raise an information.
